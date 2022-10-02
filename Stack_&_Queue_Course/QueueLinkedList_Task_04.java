@@ -13,16 +13,22 @@ class Node{
 class Queue{
     private static Node rear = null , front = null;
     
-
+//Utility function to remove front element from the queue and check for Queue Underflow
      public static void dequeue()
      {
-          Node deQNode = front;
-    
+            Node deQNode = front;
+         if(rear == null || front ==  null){
+             System.out.println("Queue is underflow");
+             return;
+         }
+       
+        else{
           System.out.println("removing "+deQNode.data);
           front = front.next;
           rear = rear.next;
+        }
      }
-
+// Utility function to add an item in the queue 
     public static void enqueue(int data)
     {
         Node newNode = new Node(data);
@@ -41,7 +47,7 @@ class Queue{
             }
             curNode.next = newNode;    
     }
-
+// Utility function to return top element in a queue 
     public static int peek()
     {
         return front.data;
@@ -59,6 +65,7 @@ class Queue{
 
 
     }
+     // Utility function to check if the queue is empty or not
     public static boolean isEmpty()
     {
          
