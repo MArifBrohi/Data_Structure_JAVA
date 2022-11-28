@@ -10,7 +10,7 @@ class Node{
     }
 }
 
-public class RecursiveBinaryTree {
+public class RecursiveBinaryTree_01 {
     
     static Node insertion(Node root,int key){
         
@@ -30,7 +30,26 @@ public class RecursiveBinaryTree {
         return root;
     }
 
-    public Node delete(Node node, int val) {
+    public static void searchNode(Node node, int ele){
+        if(node == null){
+            System.out.println("null tree exception: ");
+        }
+        else if(ele == node.data){
+            System.out.println("Value found: "+node.data);
+            return;
+        }else{
+            if(ele < node.data){
+               searchNode(node.left, ele);
+            }else{
+                 searchNode(node.right, ele);
+            }
+
+        }
+        System.out.println("Value not found:");
+        
+        
+    }
+    public static Node delete(Node node, int val) {
         if(node == null) {
           return node;
         }
@@ -44,15 +63,24 @@ public class RecursiveBinaryTree {
             Node temp = node.left != null ? node.left : node.right;
     
             if(temp == null) {
-              return null;                           //             5   
-            } else {                                 //         3       7 
-              return temp;                           //       2   4   6   9
+              return null;                           //               5   
+            } else {                                 //                 10 
+              return temp;                           //               7 
+                                                    //              6   9
+              
 
             }
-          } else {
+          }
+           else {                         // 9
             Node successor = getSuccessor(node);
+                //successor = 9
+            // System.out.println("successor.data "+successor.data);
+
+            //    System.out.println("node.data "+node.data);
+            // node.data = 7
             node.data = successor.data;
-            
+          //  node.data = 9
+                            //   ( null   ,  9)
             node.right = delete(node.right, successor.data);
             return node;
           }
@@ -60,12 +88,14 @@ public class RecursiveBinaryTree {
         
         return node;
       }
-      public Node getSuccessor(Node node) {
+      public static Node getSuccessor(Node node) {
         if(node == null) {
           return null;
         }
         
         Node temp = node.right;
+        //temp  = 9
+       // System.out.println("Node.right: "+temp.data);
         
         while(temp.left != null) {
           temp = temp.left;
@@ -82,31 +112,32 @@ public class RecursiveBinaryTree {
         }
     }
 
-    static void preOrderTraversal(Node root){
-        if(root!=null){
-            System.out.print(root.data+" ");
-            preOrderTraversal(root.left);
-            preOrderTraversal(root.right);
-        }
-    }
+    // static void preOrderTraversal(Node root){
+    //     if(root!=null){
+    //         System.out.print(root.data+" ");
+    //         preOrderTraversal(root.left);
+    //         preOrderTraversal(root.right);
+    //     }
+    // }
 
-    static void postOrderTraversal(Node root){
-        if(root!=null){
-            postOrderTraversal(root.left);
-            postOrderTraversal(root.right);
-            System.out.print(root.data+" ");
-        }
-    }
+    // static void postOrderTraversal(Node root){
+    //     if(root!=null){
+    //         postOrderTraversal(root.left);
+    //         postOrderTraversal(root.right);
+    //         System.out.print(root.data+" ");
+    //     }
+    // }
 
     public static void main(String[] args) {
         Node root=null;
-        RecursiveBinaryTree tree = new RecursiveBinaryTree();
-        int[] arr={5,3,7,2,4,9,6};
+       // RecursiveBinaryTree tree = new RecursiveBinaryTree();
+        int[] arr={5,10,7,6,9};
         // System.out.println(arr.length);
 
-        for(int key:arr){                        //             5   
-            root=insertion(root, key);           //         3       7 
-        }                                        //       2   4   6   9
+        for(int key:arr){                        //               5   
+            root=insertion(root, key);           //                 10 
+        }                                        //               7
+                                                 //             6   9  
 
         // System.out.println("Pre-order Traversal: ");
         // preOrderTraversal(root);
@@ -116,9 +147,11 @@ public class RecursiveBinaryTree {
         // System.out.println("\n");
         // System.out.println("Post-order Traversal: ");
         // postOrderTraversal(root);
-        tree.delete(root,7);
+        delete(root,7);
         System.out.println("\nIn-order Traversal: ");
         inOrderTraversal(root);
+        // System.out.println("Search Element: ");
+        // delete(root, 3);
 
     }
 }
