@@ -49,6 +49,26 @@ public class RecursiveBinaryTree_01 {
         
         
     }
+      /*===================================================*/
+//     public static Node SearchTree(Node node, int val){
+//         if(root == null){
+//             // not found
+//             return null;
+//         }
+//         else if(val == root.data){
+//             // value found
+//             return root;
+//         }
+//         else if(val < root.data){
+//             root.left  = SearchTree(root.left, val);
+//         }
+//         else{
+//             root.right = SearchTree(root.right, val);
+//         }
+//         return root;
+        
+//     }
+    /*===================================================*/
     public static Node delete(Node node, int val) {
         if(node == null) {
           return node;
